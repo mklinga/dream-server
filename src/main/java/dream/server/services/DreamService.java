@@ -5,6 +5,7 @@ import dream.server.repositories.DreamRepository;
 import jakarta.inject.Singleton;
 
 import java.util.List;
+import java.util.Optional;
 
 @Singleton
 public class DreamService {
@@ -15,6 +16,10 @@ public class DreamService {
     }
 
     public List<DreamDto> getAllDreams() {
-        return dreamRepository.findAll().stream().map(dream -> new DreamDto(dream.getTitle(), dream.getDescription())).toList();
+        return dreamRepository.findAll().stream().map(DreamDto::fromDreamEntity).toList();
+    }
+
+    public Optional<DreamDto> findDreamById(Long id) {
+        return dreamRepository.findById(id).map(DreamDto::fromDreamEntity);
     }
 }

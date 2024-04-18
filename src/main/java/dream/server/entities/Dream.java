@@ -17,5 +17,4 @@ public class Dream {
     private String title;
 
     private String description;
-
 }
