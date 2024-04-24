@@ -25,4 +25,9 @@ public class DreamService {
     public Optional<DreamDto> findDreamById(Long id) {
         return dreamRepository.findById(id).map(dreamMapper::dreamToDreamDto);
     }
+
+    public DreamDto createDream(DreamDto dreamDto) {
+        var createdDream = dreamRepository.save(dreamMapper.dreamDtoToDream(dreamDto));
+        return dreamMapper.dreamToDreamDto(createdDream);
+    }
 }

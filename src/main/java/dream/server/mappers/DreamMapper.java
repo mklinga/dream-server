@@ -7,4 +7,5 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface DreamMapper {
     DreamDto dreamToDreamDto(Dream dream);
+    Dream dreamDtoToDream(DreamDto dream);
 }
