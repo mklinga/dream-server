@@ -2,12 +2,10 @@ package dream.server.controllers;
 
 import dream.server.dto.DreamDto;
 import dream.server.services.DreamService;
+import io.micronaut.http.HttpResponse;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.MediaType;
-import io.micronaut.http.annotation.Body;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Post;
+import io.micronaut.http.annotation.*;
 import io.micronaut.http.exceptions.HttpStatusException;
 
 import java.util.List;
@@ -34,5 +32,11 @@ public class DreamController {
     @Post(produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
     public DreamDto create(@Body DreamDto dream) {
         return dreamService.createDream(dream);
+    }
+
+    @Delete(value = "/{id}")
+    public HttpResponse<Void> delete(Long id) {
+        dreamService.deleteDream(id);
+        return HttpResponse.ok();
     }
 }

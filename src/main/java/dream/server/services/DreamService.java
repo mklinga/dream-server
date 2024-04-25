@@ -19,7 +19,7 @@ public class DreamService {
     }
 
     public List<DreamDto> getAllDreams() {
-        return dreamRepository.findAll().stream().map(dreamMapper::dreamToDreamDto).toList();
+        return dreamRepository.findAllByDeletedEquals(false).stream().map(dreamMapper::dreamToDreamDto).toList();
     }
 
     public Optional<DreamDto> findDreamById(Long id) {
@@ -27,7 +27,15 @@ public class DreamService {
     }
 
     public DreamDto createDream(DreamDto dreamDto) {
-        var createdDream = dreamRepository.save(dreamMapper.dreamDtoToDream(dreamDto));
-        return dreamMapper.dreamToDreamDto(createdDream);
+        var dream = dreamMapper.dreamDtoToDream(dreamDto);
+        dream.setDeleted(false);
+        return dreamMapper.dreamToDreamDto(dreamRepository.save(dream));
+    }
+
+    public void deleteDream(Long id) {
+        dreamRepository.findById(id).ifPresent(dream -> {
+            dream.setDeleted(true);
+            dreamRepository.update(dream);
+        });
     }
 }
