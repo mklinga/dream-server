@@ -29,6 +29,7 @@ public class DreamService {
     public DreamDto createDream(DreamDto dreamDto) {
         var dream = dreamMapper.dreamDtoToDream(dreamDto);
         dream.setDeleted(false);
+
         return dreamMapper.dreamToDreamDto(dreamRepository.save(dream));
     }
 
