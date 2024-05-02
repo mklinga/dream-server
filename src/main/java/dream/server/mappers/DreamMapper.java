@@ -12,6 +12,7 @@ public interface DreamMapper {
     DreamDto dreamToDreamDto(Dream dream);
 
     @Mapping(target = "deleted", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "description", source = "description", qualifiedByName = "normaliseDescriptionLineEndings")
     Dream dreamDtoToDream(DreamDto dream);
 

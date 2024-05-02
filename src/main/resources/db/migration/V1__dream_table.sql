@@ -1,6 +1,9 @@
 CREATE TABLE dreams (
     id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    deleted BOOLEAN NOT NULL,
-    description TEXT NOT NULL
+    created_at TIMESTAMP WITH TIME ZONE,
+    date DATE,
+    deleted BOOLEAN,
+    description TEXT,
+    draft TEXT,
+    title TEXT
 );
